@@ -5,7 +5,7 @@ pipeline {
     NAME = "solar-system"
     VERSION = "${env.BUILD_ID}-${env.GIT_COMMIT}"
     IMAGE_REPO = "mdhack"
-    GITEA_TOKEN = credentials('gitea_token')
+    GITEA_TOKEN = credentials('nitheeshtoken')
   }
   
   stages {
@@ -61,7 +61,7 @@ pipeline {
       steps {
         dir("gitops-argocd/jenkins-demo") {
           sh "git config --global user.email 'mayank123modi@gmail.com'"
-          sh 'git remote set-url origin https://$nitheeshtoken@github.com/nitheeshunni/gitops-argocd'
+          sh 'git remote set-url origin https://$GITEA_TOKEN@github.com/nitheeshunni/gitops-argocd'
           sh 'git checkout main'
           sh 'git add -A'
           sh 'git commit -am "Updated image version for Build - $VERSION"'
